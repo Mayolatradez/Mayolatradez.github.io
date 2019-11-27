@@ -7,7 +7,6 @@
 
   <script src="https://unpkg.com/three"></script>
   <script src="https://unpkg.com/three-spritetext"></script>
-  <script src="three.min.js"></script>
   <script src="https://unpkg.com/3d-force-graph"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <!--<script src="../../dist/3d-force-graph.js"></script>-->
@@ -168,15 +167,22 @@
       ]
     };
 
+
     const Graph = ForceGraph3D()(document.getElementById("3d-graph"))
       .graphData(data)
+      .width(1000)
       .nodeAutoColorBy("group")
       .linkDirectionalParticles("value")
       .linkDirectionalParticleSpeed(d => d.value * 0.005)
       .linkCurvature(0)
       .linkDirectionalParticleWidth(3)
       .linkOpacity(0.4)
-      
+      .onNodeClick(node => {
+        // add specific node info to the panel
+        document.getElementById('panel_img').src = node.img;
+        document.getElementById('panel_title').innerHTML = node.id;
+        document.getElementById('panel_text').innerHTML = node.text;
+      })
       .nodeThreeObject(node => {
         // use a sphere as a drag handle
         const obj = new THREE.Mesh(
@@ -192,18 +198,20 @@
         const sprite = new SpriteText(node.id);
         sprite.color = node.color;
         sprite.textheight = 12;
-        //Sprite.onNodeClick(node => window.open(`img`, '_blank'));
         obj.add(sprite);
-        
-            // add img sprite as child on hover
-         //   .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
-        
-                       
         return obj;
       });
-      
+
     // Spread nodes a little wider
     Graph.d3Force("charge").strength(-1000);
      </script>
   </script>
+
+
+  <div id="panel" style="height: 500px; width: 200px; border: 1px solid #fff; position: absolute; top:0; right: 0">
+  Panel
+  <img id="panel_img" src="">
+  <h1 id="panel_title"></h1>
+  <span id="panel_text"></span>
+  </div>
 </body>
