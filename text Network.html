@@ -2,7 +2,6 @@
 
   <script src="https://unpkg.com/three"></script>
   <script src="https://unpkg.com/three-spritetext"></script>
-  <script src="three.min.js"></script>
   <script src="https://unpkg.com/3d-force-graph"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
@@ -26,8 +25,8 @@
      // { id: "Nanofibres", group: 0},
 	 //	{ id: "Sequestrated Fibres", group: 0},
         { id: "Microfibres", group: 0},
-		{ id: "River Sediment", group: 0},
-		{ id: "MicroFauna", group: 0},
+	    	{ id: "River Sediment", group: 0},
+    		{ id: "MicroFauna", group: 0},
         { id: "MacroFauna", group: 0},
         { id: "MegaFauna", group: 0},
         { id: "Aquaculture & Fisheries", group: 0},
@@ -37,7 +36,7 @@
         { id: "Waste Water Plants", group: 0},
         { id: "Industrial Factories", group: 0},
         { id: "Textile Factories", group: 0},
-		{ id: "Domestic and Commercial Waste Water", group: 0},
+    		{ id: "Domestic and Commercial Waste Water", group: 0},
         { id: "Agricultural Irrigation", group: 0},
         { id: "Agricultural Drains", group: 0},
         { id: "Sludge Fertilizer", group: 0},
@@ -56,11 +55,11 @@
         { id: "Numerous local companies in dry-digging phase", group: 1},
         { id: "Suez Canal", group: 2},
         { id: "China Belt & Road Initiative", group: 1 },
-		{ id: "Mankai Investments", group: 1},
-		{ id: "Free Economic Zones", group: 1},
-		{ id: "Port Saied", group: 2},
-		{ id: "Synthetic Fibre Growth", group: 1},
-		{ id: "Shundong Ruyi Group", group: 1},
+     		{ id: "Mankai Investments", group: 1},
+    		{ id: "Free Economic Zones", group: 1},
+    		{ id: "Port Saied", group: 2},
+	    	{ id: "Synthetic Fibre Growth", group: 1},
+    		{ id: "Shundong Ruyi Group", group: 1},
         { id: "Shundong Ruyi Factories", group: 1},
         { id: "Mankai textile Park", group: 1},
         { id: "Sadat City", group: 2},
@@ -68,7 +67,7 @@
       ],
       links: [
         /** logic */
-		{ source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
+	    	{ source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
         { source: "Mankai Investments", target: "Free Economic Zones", value: 0},
         { source: "China Belt & Road Initiative", target: "Shundong Ruyi Group", value: 0},
         { source: "Shundong Ruyi Group", target: "Free Economic Zones", value: 0},
@@ -151,28 +150,7 @@
       ]
     };
 
-    // link parent/children
-	const rootId = "Nile River";
-
-    const nodesById = Object.fromEntries(data.nodes.map(node => [node.id, node]));
-    data.links.forEach(link => {
-      nodesById[link.source].childLinks.push(link);
-    });
-
-    const getPrunedTree = () => {
-      const visibleNodes = [];
-      const visibleLinks = [];
-      (function traverseTree(node = nodesById[rootId]) {
-        visibleNodes.push(node);
-        if (node.collapsed) return;
-        visibleLinks.push(...node.childLinks);
-        node.childLinks
-          .map(link => ((typeof link.target) === 'object') ? link.target : nodesById[link.target]) // get child node
-          .forEach(traverseTree);
-      })(); // IIFE
-      return { nodes: visibleNodes, links: visibleLinks };
-    };
-
+  
     const Graph = ForceGraph3D()(document.getElementById("3d-graph"))
       .graphData(data)
       .width(1000)
@@ -188,11 +166,8 @@
         document.getElementById('panel_title').innerHTML = node.id;
         document.getElementById('panel_text').innerHTML = node.text;
 
-        // zoom in node in funky ways
-        if (node.childLinks.length) {
-            node.collapsed = !node.collapsed; // toggle collapse state
-            Graph.graphData(getPrunedTree());
-        }
+       
+    
       })
       .nodeThreeObject(node => {
         // use a sphere as a drag handle
