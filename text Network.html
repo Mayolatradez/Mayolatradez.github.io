@@ -1,39 +1,30 @@
 <head>
-  <style>
-    body {
-      margin: 0;
-    }
-  </style>
 
   <script src="https://unpkg.com/three"></script>
   <script src="https://unpkg.com/three-spritetext"></script>
+  <script src="three.min.js"></script>
   <script src="https://unpkg.com/3d-force-graph"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <!--<script src="../../dist/3d-force-graph.js"></script>-->
 </head>
 
 <body>
   <div id="3d-graph"></div>
 
   <script>
-     
-    /** CHANGE THE DATA TO CHANGE YOUR GRAPH */
-
-    
     const data = {
       nodes: [
 		/** Environmental Violence */
-    //    { id: "Septic tanks", group: 0},
+     // { id: "Septic tanks", group: 0},
         { id: "Domestic & Commercial", group: 0},
 		{ id: "Nile River", group: 0},
         { id: "Nile Delta", group: 0},
         { id: "Mediterranean Sea", group: 0},
         { id: "Microbial Colonies", group: 0},
-    //  { id: "Psuedomonas sp.", group: 0},
+     // { id: "Psuedomonas sp.", group: 0},
      // { id: "infection", group: 0},
      // { id: "Ideonella sakaiensi", group: 0},
      // { id: "Nanofibres", group: 0},
-//		{ id: "Sequestrated Fibres", group: 0},
+	 //	{ id: "Sequestrated Fibres", group: 0},
         { id: "Microfibres", group: 0},
 		{ id: "River Sediment", group: 0},
 		{ id: "MicroFauna", group: 0},
@@ -74,14 +65,9 @@
         { id: "Mankai textile Park", group: 1},
         { id: "Sadat City", group: 2},
         { id: "Egypt", group: 2},
-		  
-		  
-
-//
       ],
       links: [
-/** logic */
-		  
+        /** logic */
 		{ source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
         { source: "Mankai Investments", target: "Free Economic Zones", value: 0},
         { source: "China Belt & Road Initiative", target: "Shundong Ruyi Group", value: 0},
@@ -110,7 +96,6 @@
         { source: "URBASER from Spain", target: "Emaar from United Arab Emirates", value: 1},
         { source: "URBASER from Spain", target: "AMA S.p.A. (ama) from Italy", value: 1},
         { source: "URBASER from Spain", target: "FCC from Spain", value: 1},
-              
         { source: "International Consortiums", target: "Suez Canal", value: 1},
         { source: "International Consortiums", target: "Shundong Ruyi Group", value: 0},
         { source: "International Consortiums", target: "Mankai Investments", value: 0},
@@ -122,7 +107,6 @@
         { source: "Egypt", target: "Port Saied", value: 1},
         { source: "Egypt", target: "Free Economic Zones", value: 1},
         { source: "Numerous local companies in dry-digging phase", target: "New Suez Canal", value: 1},
-        
         { source: "Zabbaleen", target: "City Solid Waste", value: 5},
         { source: "Egyptian Company for Garbage Collection (ECGC)", target: "City Solid Waste", value: 1},
         { source: "URBASER from Spain", target: "City Solid Waste", value: 1},
@@ -167,6 +151,27 @@
       ]
     };
 
+    // link parent/children
+	const rootId = "Nile River";
+
+    const nodesById = Object.fromEntries(data.nodes.map(node => [node.id, node]));
+    data.links.forEach(link => {
+      nodesById[link.source].childLinks.push(link);
+    });
+
+    const getPrunedTree = () => {
+      const visibleNodes = [];
+      const visibleLinks = [];
+      (function traverseTree(node = nodesById[rootId]) {
+        visibleNodes.push(node);
+        if (node.collapsed) return;
+        visibleLinks.push(...node.childLinks);
+        node.childLinks
+          .map(link => ((typeof link.target) === 'object') ? link.target : nodesById[link.target]) // get child node
+          .forEach(traverseTree);
+      })(); // IIFE
+      return { nodes: visibleNodes, links: visibleLinks };
+    };
 
     const Graph = ForceGraph3D()(document.getElementById("3d-graph"))
       .graphData(data)
@@ -182,6 +187,12 @@
         document.getElementById('panel_img').src = node.img;
         document.getElementById('panel_title').innerHTML = node.id;
         document.getElementById('panel_text').innerHTML = node.text;
+
+        // zoom in node in funky ways
+        if (node.childLinks.length) {
+            node.collapsed = !node.collapsed; // toggle collapse state
+            Graph.graphData(getPrunedTree());
+        }
       })
       .nodeThreeObject(node => {
         // use a sphere as a drag handle
