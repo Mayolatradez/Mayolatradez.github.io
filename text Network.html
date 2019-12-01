@@ -1,32 +1,28 @@
 <head>
-
+<link rel="stylesheet" href = "css/styles.css">
   <script src="https://unpkg.com/three"></script>
   <script src="https://unpkg.com/three-spritetext"></script>
   <script src="https://unpkg.com/3d-force-graph"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  
+  
 </head>
-
+<!script src='../ADS3/Curl Noise.js'></!script>
 <body>
   <div id="3d-graph"></div>
 
   <script>
     const data = {
       nodes: [
-		/** Environmental Violence */
-     // { id: "Septic tanks", group: 0},
+     /** Environmental Violence */
         { id: "Domestic & Commercial", group: 0},
-		{ id: "Nile River", group: 0},
+        { id: "Nile River", group: 0},
         { id: "Nile Delta", group: 0},
-        { id: "Mediterranean Sea", group: 0},
-        { id: "Microbial Colonies", group: 0},
-     // { id: "Psuedomonas sp.", group: 0},
-     // { id: "infection", group: 0},
-     // { id: "Ideonella sakaiensi", group: 0},
-     // { id: "Nanofibres", group: 0},
-	 //	{ id: "Sequestrated Fibres", group: 0},
-        { id: "Microfibres", group: 0},
-	    	{ id: "River Sediment", group: 0},
-    		{ id: "MicroFauna", group: 0},
+        { id: "Mediterranean Sea", text:"The Medditerranean Sea has one of the highest concetrations of microfibres recorded. Off the coast Egypt, the particle count goes up to 1 million parts per square kilometer. This is has an impact on the marine fauna. The Fiber count is attributed to the waste water outfall into rivers that ultimately makes into the Sea" ,group: 0},
+        { id: "Microbial Colonies", text:"Microbial Colonies metabolise with microfibers due to them being carbon based polymers. Whilst there are species of microbial oragnisms like Psuedomonas that fully metabolise and breakdown fibres most fibres dont break down fast enough before they are consumed by marine life. ", img:'../ADS3/Images/Biofilm Microbial.gif', group: 0},
+        { id: "Microfibres", text:"Little attention has gone into understanding the fate and effects of microfibres which are mostly shed from synthetic textiles during production and washing. Polyethylene terephthalate a thermoplastic polymer resin used in all artificial textiles, like polyester and nylon are not biodegradable. Textiles is the second largest pollutant and Microfibres, a product of the apparel industry, has recently come to the forefront of the ocean pollution discourse and we are yet to uncover the violence it holds. When these fibres enter our water ways they harbour contaminants, metabolise microbial life and drift only to be consumed by bottom feeders which stifle their growth which ultimately affects the food chain.", img:'', group: 0},
+        { id: "River Sediment",  text:"Abbrasive degredation happens when microfibres end up on river sediment. Because it is a physically breaking it down it merely breaks down further into nanofibres this modifies the soil properties which", group: 0},
+        { id: "MicroFauna", group: 0},
         { id: "MacroFauna", group: 0},
         { id: "MegaFauna", group: 0},
         { id: "Aquaculture & Fisheries", group: 0},
@@ -36,7 +32,7 @@
         { id: "Waste Water Plants", group: 0},
         { id: "Industrial Factories", group: 0},
         { id: "Textile Factories", group: 0},
-    		{ id: "Domestic and Commercial Waste Water", group: 0},
+        { id: "Domestic and Commercial Waste Water", group: 0},
         { id: "Agricultural Irrigation", group: 0},
         { id: "Agricultural Drains", group: 0},
         { id: "Sludge Fertilizer", group: 0},
@@ -44,7 +40,7 @@
         { id: "City Solid Waste", group: 0},
         /** Socioeconomic Violence*/
         { id: "International Consortiums", group: 3},
-        { id: "Zabbaleen",img: 'Zabbaleen.jpg', group: 1},
+        { id: "Zabbaleen",img: '../ADS3/Images/Zabbaleen.jpg', group: 1},
         { id: "Egyptian Company for Garbage Collection (ECGC)", group: 2},
         { id: "URBASER from Spain", group: 3},
         { id: "FCC from Spain", group: 3},
@@ -55,11 +51,11 @@
         { id: "Numerous local companies in dry-digging phase", group: 1},
         { id: "Suez Canal", group: 2},
         { id: "China Belt & Road Initiative", group: 1 },
-     		{ id: "Mankai Investments", group: 1},
-    		{ id: "Free Economic Zones", group: 1},
-    		{ id: "Port Saied", group: 2},
-	    	{ id: "Synthetic Fibre Growth", group: 1},
-    		{ id: "Shundong Ruyi Group", group: 1},
+        { id: "Mankai Investments", group: 1},
+        { id: "Free Economic Zones", group: 1},
+        { id: "Port Saied", group: 2},
+        { id: "Synthetic Fibre Growth", group: 1},
+        { id: "Shundong Ruyi Group", group: 1},
         { id: "Shundong Ruyi Factories", group: 1},
         { id: "Mankai textile Park", group: 1},
         { id: "Sadat City", group: 2},
@@ -67,7 +63,7 @@
       ],
       links: [
         /** logic */
-	    	{ source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
+        { source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
         { source: "Mankai Investments", target: "Free Economic Zones", value: 0},
         { source: "China Belt & Road Initiative", target: "Shundong Ruyi Group", value: 0},
         { source: "Shundong Ruyi Group", target: "Free Economic Zones", value: 0},
@@ -148,12 +144,14 @@
         { source: "Domestic & Commercial", target: "Egypt" , value: 1},
         { source: "Aquaculture & Fisheries", target: "Domestic & Commercial", value: 1},
       ]
-    };
+    
+
+      
+  };
 
   
     const Graph = ForceGraph3D()(document.getElementById("3d-graph"))
       .graphData(data)
-      .width(1000)
       .nodeAutoColorBy("group")
       .linkDirectionalParticles("value")
       .linkDirectionalParticleSpeed(d => d.value * 0.005)
@@ -176,28 +174,36 @@
           new THREE.MeshBasicMaterial({
             depthWrite: false,
             transparent: true,
-            opacity: 0
+            opacity: 0,
+//Aninmating nodes 
+         //   function animate() {
+         //   obj.position.x = Math.random(50, 150) * window.innerWidth + window.innerHeight;
+         //   }
+
+            
           })
         );
-
+      
         // add text sprite as child
         const sprite = new SpriteText(node.id);
+        sprite.textfont = "carbon";
         sprite.color = node.color;
         sprite.textheight = 12;
+        
         obj.add(sprite);
         return obj;
       });
 
     // Spread nodes a little wider
     Graph.d3Force("charge").strength(-1000);
-     </script>
+    
+
   </script>
 
 
-  <div id="panel" style="height: 500px; width: 200px; border: 1px solid #fff; position: absolute; top:0; right: 0">
-  Panel
-  <img id="panel_img" src="">
-  <h1 id="panel_title"></h1>
-  <span id="panel_text"></span>
+  <div id="Archive" class="archive">
+  <img id="panel_img" src="" class="panel_img">
+  <h1 id="panel_title" class="panel_title"></h1>
+  <p id="panel_text" class="panel_text"></p>
   </div>
 </body>
