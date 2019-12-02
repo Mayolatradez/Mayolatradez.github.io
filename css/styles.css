@@ -1,5 +1,5 @@
 body {
-	background: linear-gradient(270deg, rgba(85,33,213,1) 0%, rgba(17,38,112,1) 8%, rgba(8,14,68,1) 20%, rgba(14,1,36,1) 44%, rgba(0,0,0,1) 100%);
+	background: rgba(0,0,0,1);
 
 }
 
@@ -20,11 +20,14 @@ body {
 }
 
 .panel_title {
-	font-family: 'carbon';
+	font-family: t26-carbon, monospace;
+	font-style: normal;
+	font-weight: 100;
+	text-transform: uppercase;
 	color: rgba(255, 255, 255, 1);
 }
 
 .panel_text {
-	font-family: 'carbon';
+	font-family: Carbon;
 	color: rgba(255, 255, 255, 0.75);
 }

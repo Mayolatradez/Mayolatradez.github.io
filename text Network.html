@@ -25,8 +25,8 @@
       const data = {
         nodes: [
        /** Environmental Violence */
-          { id: "Domestic & Commercial", group: 0},
-          { id: "Nile River", group: 0},
+          { id: "Domestic & Commercial", text:"Domestic and Commercial zones in cities are the largest contributor of microfibres. Every working washing machine in the home and in businesses like professional laundramats and hospitality run almost daily producing about 6 million fibres or 5g per wash. If 500 000 fleece jackets washed equate to 30kg of microfibres", group: 0},
+          { id: "Nile River",text:"This river holds historical importance and is the life line of Egypt. Running across the State it carries water used in domestic and commercial settings,\ 85% - Agricultural \ 12% - Agricultural \ 3% - Agricultural", group: 0},
           { id: "Nile Delta", group: 0},
           { id: "Mediterranean Sea", text:"The Medditerranean Sea has one of the highest concetrations of microfibres recorded. Off the coast Egypt, the particle count goes up to 1 million parts per square kilometer. This is has an impact on the marine fauna. The Fiber count is attributed to the waste water outfall into rivers that ultimately makes into the Sea" ,group: 0},
           { id: "Microbial Colonies", text:"Microbial Colonies metabolise with microfibers due to them being carbon based polymers. Whilst there are species of microbial oragnisms like Psuedomonas that fully metabolise and breakdown fibres most fibres dont break down fast enough before they are consumed by marine life. ", img:'../ADS3/Images/Biofilm Microbial.gif', group: 0},
@@ -173,28 +173,22 @@
         .linkDirectionalParticleColor(() => 'rgb(255, 30, 215)')
         .linkWidth(0.1)
         .linkOpacity(0.4)
-        .onNodeClick(node => {
+        .onNodeDragEnd(node => {
           // add specific node info to the panel
           document.getElementById('panel_img').src = node.img;
           document.getElementById('panel_title').innerHTML = node.id;
           document.getElementById('panel_text').innerHTML = node.text;
-  
          
       
         })
         .nodeThreeObject(node => {
           // use a sphere as a drag handle
           const obj = new THREE.Mesh(
-            new THREE.SphereGeometry(30),
+            new THREE.SphereGeometry(10),
             new THREE.MeshBasicMaterial({
               depthWrite: false,
               transparent: true,
-              opacity: 0,
-  //Aninmating nodes 
-           //   function animate() {
-           //   obj.position.x = Math.random(50, 150) * window.innerWidth + window.innerHeight;
-           //   }
-  
+              opacity: 0.1,
               
             })
           );
