@@ -7,7 +7,9 @@
   <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js' charset="utf-8"></script>
 </head>
 <body>
-    <div id="particles-js" style="z-index: -1;
+    
+    <div 
+    id="particles-js" style="z-index: -1;
     position: fixed;
     top: 0;
     left: 0; right: 0; bottom: 0;"></div>
@@ -71,18 +73,18 @@
         ],
         links: [
           /** logic */
-          { source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
-          { source: "Mankai Investments", target: "Free Economic Zones", value: 0},
-          { source: "China Belt & Road Initiative", target: "Shundong Ruyi Group", value: 0},
-          { source: "Shundong Ruyi Group", target: "Free Economic Zones", value: 0},
-          { source: "China Belt & Road Initiative", target: "New Suez Canal", value: 0},
-          { source: "China Belt & Road Initiative", target: "Mankai Investments", value: 0},
-          { source: "Free Economic Zones", target: "Suez Canal", value: 0},
-          { source: "Shundong Ruyi Factories", target: "Suez Canal", value: 0},
-          { source: "Mankai textile Park", target: "Sadat City", value: 0},
-          { source: "China Belt & Road Initiative", target: "Free Economic Zones", value: 0},
-          { source: "Free Economic Zones", target: "Shundong Ruyi Factories", value: 0},
-          { source: "Free Economic Zones", target: "Mankai textile Park", value: 0},
+          { source: "Shundong Ruyi Factories", target: "Suez Canal", value: 1},
+          { source: "Mankai Investments", target: "Free Economic Zones", value: 1},
+          { source: "China Belt & Road Initiative", target: "Shundong Ruyi Group", value: 1},
+          { source: "Shundong Ruyi Group", target: "Free Economic Zones", value: 1},
+          { source: "China Belt & Road Initiative", target: "New Suez Canal", value: 1},
+          { source: "China Belt & Road Initiative", target: "Mankai Investments", value: 1},
+          { source: "Free Economic Zones", target: "Suez Canal", value: 1},
+          { source: "Shundong Ruyi Factories", target: "Suez Canal", value: 1},
+          { source: "Mankai textile Park", target: "Sadat City", value: 1},
+          { source: "China Belt & Road Initiative", target: "Free Economic Zones", value: 1},
+          { source: "Free Economic Zones", target: "Shundong Ruyi Factories", value: 1},
+          { source: "Free Economic Zones", target: "Mankai textile Park", value: 1},
           { source: "Shundong Ruyi Factories", target: "Suez Canal", value: 1},
           { source: "New Suez Canal", target: "Suez Canal", value: 1},
           { source: "Suez Canal", target: "Port Saied", value: 1},
@@ -100,8 +102,8 @@
           { source: "URBASER from Spain", target: "AMA S.p.A. (ama) from Italy", value: 1},
           { source: "URBASER from Spain", target: "FCC from Spain", value: 1},
           { source: "International Consortiums", target: "Suez Canal", value: 1},
-          { source: "International Consortiums", target: "Shundong Ruyi Group", value: 0},
-          { source: "International Consortiums", target: "Mankai Investments", value: 0},
+          { source: "International Consortiums", target: "Shundong Ruyi Group", value: 1},
+          { source: "International Consortiums", target: "Mankai Investments", value: 1},
           { source: "Egypt", target: "Egyptian Company for Garbage Collection (ECGC)", value: 1},
           { source: "Egyptian Company for Garbage Collection (ECGC)", target: "International Consortiums", value: 1},
           { source: "Egypt", target: "Zabbaleen", value: 1},
@@ -163,10 +165,13 @@
         .graphData(data)
         .backgroundColor('rgba(0,0,0,0)')
         .nodeAutoColorBy("group")
-        .linkDirectionalParticles("value")
-        .linkDirectionalParticleSpeed(d => d.value * 0.005)
+        .linkDirectionalParticles(5)
+        .linkDirectionalParticleSpeed(d => d.value * 0.01)
         .linkCurvature(0)
-        .linkDirectionalParticleWidth(3)
+        .linkDirectionalParticleWidth(5)
+        .linkColor(() => 'rgb(255, 30, 215)')
+        .linkDirectionalParticleColor(() => 'rgb(255, 30, 215)')
+        .linkWidth(0.1)
         .linkOpacity(0.4)
         .onNodeClick(node => {
           // add specific node info to the panel
@@ -209,4 +214,9 @@
       
   
     </script>
+    <div id="Archive" class="archive">
+    <img id="panel_img" src="" class="panel_img">
+    <h1 id="panel_title" class="panel_title"></h1>
+    <p id="panel_text" class="panel_text"></p>
+    </div>
 </body>
