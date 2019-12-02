@@ -165,10 +165,10 @@
         .graphData(data)
         .backgroundColor('rgba(0,0,0,0)')
         .nodeAutoColorBy("group")
-        .linkDirectionalParticles(5)
+        .linkDirectionalParticles(4)
         .linkDirectionalParticleSpeed(d => d.value * 0.01)
         .linkCurvature(0)
-        .linkDirectionalParticleWidth(5)
+        .linkDirectionalParticleWidth(2)
         .linkColor(() => 'rgb(255, 30, 215)')
         .linkDirectionalParticleColor(() => 'rgb(255, 30, 215)')
         .linkWidth(0.1)
@@ -185,7 +185,7 @@
         .nodeThreeObject(node => {
           // use a sphere as a drag handle
           const obj = new THREE.Mesh(
-            new THREE.SphereGeometry(10),
+            new THREE.SphereGeometry(30),
             new THREE.MeshBasicMaterial({
               depthWrite: false,
               transparent: true,

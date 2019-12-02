@@ -1,29 +1,31 @@
 body {
-	background: radial-gradient(circle, rgba(68,8,57,1) 0%, rgba(70,3,58,1) 33%, rgba(2,0,36,1) 100%);
+
+	background: linear-gradient(270deg, rgba(85,33,213,1) 0%, rgba(17,38,112,1) 8%, rgba(8,14,68,1) 20%, rgba(14,1,36,1) 44%, rgba(0,0,0,1) 100%);
 
 }
 
 .archive { 
-	height: 620px;
-	width: 440px;
+	height: 640px;
+	width: 560px;
 	position: absolute;
 	top: 50px;
 	right: 50px;
 	border-width: 20px;
+	
 }
 
 .panel_img {
-	width: 440px;
+	width: 560px;
 	border-width: 20px;
-	background-blend-mode: multiply;
+	
 }
 
 .panel_title {
-	font-family: carbon;
+	font-family: 'carbon';
 	color: rgba(255, 255, 255, 1);
 }
 
 .panel_text {
-	font-family: carbon;
+	font-family: 'carbon';
 	color: rgba(255, 255, 255, 0.75);
 }
