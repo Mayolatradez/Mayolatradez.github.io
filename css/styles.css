@@ -1,10 +1,3 @@
-@font-face {
-
-font-family : 'Helvetica Now';
-src: url('http://raw.githubusercontent.com/Mayolatradez/ADS3/blob/master/css/HelveticaNowDisplayXBlk.otf');
-font-weight: 100;
-font-style: normal;
-} 
 
 body {
 	background: rgba(0,0,0,1);
@@ -28,14 +21,17 @@ body {
 }
 
 .panel_title {
-	font-family: 'Helvetica Now', monospace;
+	font-family: 'Archivo', sans-serif;
 	font-style: normal;
 	font-weight: 100;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 1);
+	color: #99195E;
+	background-color:BLACK; 
 }
 
 .panel_text {
-	font-family: Carbon;
-	color: rgba(255, 255, 255, 0.75);
+	font-family: 'Roboto', sans-serif;
+	font-weight: 30;
+	color: #99195E;
+	background-color:BLACK; 
 }
