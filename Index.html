@@ -106,7 +106,8 @@
           text:"Sludge collected from waste water facilities and is treated and recycled on to land as a fertiliser and to improve soil structure. Although it contains useful organic matter it can also be a source of disease or toxic amounts of micronutrients if used incorrectly.", 
           img:'../ADS3/Images/SLUDGE FERTILIZER', group: 0},
           
-          { id: "City Solid Waste Management", text:"Up to 40% of Egypt's generated waste is not operated by public or private institutions, but placed in streets, rivers, lakes, drainage channels or illegal dumping sites. Only an estimated 6% of the produced waste is collected, and only partly recycled. The improper disposal of solid waste pollutes air, water and soil, and compromises public and animal health.[9] Up until 2018, the Egyptian government had been giving little attention to solid waste management, public health and environmental protection.",
+          { id: "City Solid Waste Management", 
+          text:"Up to 40% of Egypt's generated waste is not operated by public or private institutions, but placed in streets, rivers, lakes, drainage channels or illegal dumping sites. Only an estimated 6% of the produced waste is collected, and only partly recycled. The improper disposal of solid waste pollutes air, water and soil, and compromises public and animal health.[9] Up until 2018, the Egyptian government had been giving little attention to solid waste management, public health and environmental protection.",
           img:'../ADS3/Images/WASTE MANAGEMENT', group: 0},
           
           { id: "Zabbaleen", 
@@ -147,7 +148,7 @@
         links: [
           /** logic */
           
-          { source: "Ningxia Mankai Investments", target: "Free Economic Zones", value: 1},
+         /* { source: "Ningxia Mankai Investments", target: "Free Economic Zones", value: 1},
           { source: "China Belt & Road Initiative", target: "Ningxia Mankai Investments", value: 1},
           { source: "Free Economic Zones", target: "Suez Canal", value: 1},
           { source: "Ningxia Mankai Investments", target: "Sadat City", value: 1},
@@ -197,7 +198,7 @@
           { source: "Aquaculture & Fisheries", target: "Domestic & Commercial", value: 1},
           { source: "Domestic & Commercial", target: "Egypt" , value: 1},
           { source: "Aquaculture & Fisheries", target: "Domestic & Commercial", value: 1},
-        ]
+       */ ]
       
   
   
@@ -248,7 +249,7 @@
         });
   
       // Spread nodes a little wider
-      Graph.d3Force("charge").strength(-1000);
+      Graph.d3Force("charge").strength(-10000);
       
   
     </script>
